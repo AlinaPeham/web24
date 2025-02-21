@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="846de98d-6f61-4dd7-9136-162830d27e06" name="Hetzner">
+        <fileTransfer accessType="SFTP" host="s2310456015.kwmhgb.at" port="22" sshConfigId="48130add-252e-4b08-8235-5d8faf143e5b" sshConfig="cjouwp@s2310456015.kwmhgb.at:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

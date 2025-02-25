@@ -109,15 +109,18 @@ class View {
                             </ul>
                         </div>
                     </div>
-                    <p class="card-text">0 Artikel</p>
-                    <a href="#" class="btn btn-outline-success">Ansehen</a>
+                    <!-- Button nach rechts verschieben -->
+                    <div class="text-end">
+                        <a href="../html/view-list.html?listName=${list.name}" class="btn btn-outline-success">Ansehen</a>
+                    </div>
                 </div>
             </div>
-            `;
+        `;
 
             container.appendChild(listElement);
         });
     }
+
 
     bindAddArticle(handler) {
         document.getElementById("itemForm").addEventListener("submit", (event) => {

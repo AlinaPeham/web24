@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CartMate - Ansicht</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success px-3 d-flex justify-content-between">
+    <a class="navbar-brand" href="#">CartMate</a>
+    <div class="dropdown">
+        <i class="bi bi-person-circle profile-icon text-white fs-3 me-3" data-bs-toggle="dropdown"></i>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Mein Profil</a></li>
+            <li><a class="dropdown-item" href="#">Einstellungen</a></li>
+            <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Zurück-Button -->
+<div class="container mt-4">
+    <a href="index.html" class="btn btn-outline-success">
+        <i class="bi bi-arrow-left"></i> Zurück zur Liste
+    </a>
+</div>
+
+<!-- Listen-Name und Artikel anzeigen -->
+<div class="container mt-4">
+    <h2 id="listName">Liste: [Listenname]</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped mt-4" id="itemsTable">
+            <thead>
+            <tr>
+                <th>Emoji</th>
+                <th>Artikel</th>
+                <th>Kategorie</th>
+                <th>Aktionen</th>
+            </tr>
+            </thead>
+            <tbody id="articlesContainer">
+            <!-- Hier werden die Artikel angezeigt -->
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Neuen Artikel hinzufügen:</h3>
+    <form id="addArticleForm">
+        <div class="mb-3">
+            <label for="itemName" class="form-label">Artikelname</label>
+            <input type="text" class="form-control" id="itemName" required>
+        </div>
+        <div class="mb-3">
+            <label for="itemCategory" class="form-label">Kategorie</label>
+            <input type="text" class="form-control" id="itemCategory" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Artikel hinzufügen</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const listName = urlParams.get("listName");
+
+        if (listName) {
+            document.getElementById("listName").textContent = `Deine Einkaufsliste: ${listName}`;
+        }
+
+        // Artikel aus dem LocalStorage laden
+        const storedItems = JSON.parse(localStorage.getItem('shoppingList')) || [];
+        renderArticles(storedItems);
+
+        // Artikel in die Tabelle einfügen
+        function renderArticles(items) {
+            const articlesContainer = document.getElementById("articlesContainer");
+
+            // Für jeden Artikel in der gespeicherten Liste
+            items.forEach(item => {
+                const articleElement = document.createElement("tr");
+                articleElement.innerHTML = `
+                    <td>${item.emoji}</td>
+                    <td>${item.name}</td>
+                    <td>${item.category}</td>
+                    <td>
+                        <button class="btn btn-success btn-sm" onclick="markAsPurchased(this)">Kauf abgeschlossen</button>
+                    </td>
+                `;
+                articlesContainer.appendChild(articleElement);
+            });
+        }
+
+        // Artikel hinzufügen
+        document.getElementById("addArticleForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const itemName = document.getElementById("itemName").value.trim();
+            const itemCategory = document.getElementById("itemCategory").value.trim();
+
+            if (itemName && itemCategory) {
+                // Artikel in gespeicherte Liste suchen
+                const existingItem = storedItems.find(item => item.name.toLowerCase() === itemName.toLowerCase());
+
+                if (!existingItem) {
+                    // Artikel hinzufügen, falls er nicht existiert
+                    const newItem = { name: itemName, category: itemCategory, emoji: "❓" };  // Fragezeichen-Emoji
+                    storedItems.push(newItem);
+
+                    // Artikel in LocalStorage speichern
+                    localStorage.setItem('shoppingList', JSON.stringify(storedItems));
+
+                    // Artikel anzeigen
+                    const articlesContainer = document.getElementById("articlesContainer");
+                    const articleElement = document.createElement("tr");
+                    articleElement.innerHTML = `
+                        <td>${newItem.emoji}</td>
+                        <td>${newItem.name}</td>
+                        <td>${newItem.category}</td>
+                        <td>
+                            <button class="btn btn-success btn-sm" onclick="markAsPurchased(this)">Kauf abgeschlossen</button>
+                        </td>
+                    `;
+                    articlesContainer.appendChild(articleElement);
+                } else {
+                    alert("Artikel existiert bereits!");
+                }
+
+                // Formular zurücksetzen
+                document.getElementById("addArticleForm").reset();
+            }
+        });
+    });
+
+    // Artikel als gekauft markieren (löschen)
+    function markAsPurchased(button) {
+        const row = button.closest("tr");
+        const itemName = row.cells[1].textContent;  // Artikelname
+
+        // Artikel aus der gespeicherten Liste entfernen
+        let storedItems = JSON.parse(localStorage.getItem('shoppingList')) || [];
+        storedItems = storedItems.filter(item => item.name !== itemName);
+
+        // Update LocalStorage
+        localStorage.setItem('shoppingList', JSON.stringify(storedItems));
+
+        // Zeile aus der Tabelle entfernen
+        row.remove();
+    }
+</script>
+</body>
+</html>

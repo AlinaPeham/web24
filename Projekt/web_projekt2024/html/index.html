@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CartMate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success px-3 d-flex justify-content-between">
+    <a class="navbar-brand" href="#">CartMate</a>
+    <div class="dropdown">
+        <i class="bi bi-person-circle profile-icon text-white fs-3 me-3" data-bs-toggle="dropdown"></i>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Mein Profil</a></li>
+            <li><a class="dropdown-item" href="#">Einstellungen</a></li>
+            <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>Meine Einkaufslisten</h2>
+        <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#newListModal">+ Neue Liste</button>
+    </div>
+</div>
+
+<!-- Container für Einkaufslisten -->
+<div class="container mt-4">
+    <div class="row" id="shoppingLists"></div>
+</div>
+
+<div class="container mt-5 wishlist-container">
+    <h2 class="wishlist-title">Was soll in meinen Einkaufswagen?</h2>
+
+    <!-- Erklärung zur Emoji-Funktion -->
+    <p class="text-muted">
+        Am Laptop wird automatisch ein passendes Emoji hinzugefügt, wenn es verfügbar ist.
+        Auf dem Handy kannst du dein eigenes Emoji manuell eingeben.
+    </p>
+
+    <div class="card p-3 border-0">
+        <form id="itemForm">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="itemEmoji" placeholder="Emoji">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="itemName" placeholder="Artikelname">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="itemCategory" placeholder="Kategorie">
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success w-100">Hinzufügen</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Tabelle zur Anzeige der hinzugefügten Artikel -->
+<div class="container mt-4 mb-5" id="itemTableContainer" style="display: none;">
+    <table class="table table-striped table-bordered">
+        <thead class="table-header">
+        <tr>
+            <th>Icon</th>
+            <th>Artikel</th>
+            <th>Kategorie</th>
+            <th style="width: 120px; text-align: center;">Aktionen</th>
+        </tr>
+        </thead>
+        <tbody id="itemTableBody"></tbody>
+    </table>
+</div>
+
+<!-- Modal zum Erstellen einer neuen Liste -->
+<div class="modal fade" id="newListModal" tabindex="-1" aria-labelledby="newListModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newListModalLabel">Neue Einkaufsliste</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newListForm">
+                    <div class="mb-3">
+                        <label for="listName" class="form-label">Listenname</label>
+                        <input type="text" class="form-control" id="listName" placeholder="z. B. Supermarkt">
+                    </div>
+                    <button type="submit" class="btn btn-success">Erstellen</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript-Dateien -->
+<script type="module" src="../js/model.js"></script>
+<script type="module" src="../js/view.js"></script>
+<script type="module" src="../js/controller.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="../Css/styles.css">
+
+<!-- Controller initialisieren -->
+<script type="module">
+    import Controller from '../js/controller.js';
+    document.addEventListener('DOMContentLoaded', () => new Controller());
+</script>
+</body>
+</html>

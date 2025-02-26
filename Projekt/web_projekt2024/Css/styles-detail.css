@@ -1,0 +1,113 @@
+/* Grundlegende Stile für das gesamte Layout */
+body {
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header / Navbar */
+.navbar {
+    background-color: #28a745;  /* Grün als Akzentfarbe */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .navbar-brand {
+    font-weight: bold;
+}
+
+.navbar .profile-icon {
+    cursor: pointer;
+}
+
+.navbar .dropdown-menu {
+    border-radius: 10px;
+}
+
+/* Zurück-Button */
+.btn-outline-success {
+    font-weight: 500;
+    color: #28a745;
+    border: 2px solid #28a745;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Artikel-Tabelle */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    text-align: center;
+}
+
+table td {
+    text-align: center;
+}
+
+table td button {
+    font-size: 12px;
+    padding: 5px 10px;
+}
+
+/* Artikel Formular */
+.form-label {
+    font-weight: 600;
+}
+
+/* Hover-Effekte für Artikel */
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Dropdowns */
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #28a745;
+}
+
+/* Buttons in Formular */
+button.btn {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: white;
+    color: #28a745;
+}
+
+/* Fehlerbehandlung und Konsistenz */
+.error-message {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+/* Media Queries für mobile Geräte */
+@media (max-width: 768px) {
+    .navbar .navbar-brand {
+        font-size: 18px;
+    }
+
+    .table-responsive {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .form-select, .form-control {
+        width: 100%;
+    }
+}

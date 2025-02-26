@@ -5,6 +5,10 @@ body {
     padding: 0;
 }
 
+.List-title{
+    color: #155724;
+}
+
 /* Header / Navbar */
 .navbar {
     background-color: #28a745;  /* Grün als Akzentfarbe */
@@ -88,6 +92,10 @@ button.btn {
 button.btn:hover {
     background-color: white;
     color: #28a745;
+}
+
+button.btn.btn-danger:hover{
+    color: #ff4d4d;
 }
 
 /* Fehlerbehandlung und Konsistenz */

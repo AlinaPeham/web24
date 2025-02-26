@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let allItems = [...storedItems];
 
     // Controller: Abrufen von Artikeln aus einer JSON-Datei und Updaten der Ansicht
-    fetch('../Data/data.json')
+    fetch('./JSON/data.json')
         .then(response => response.json())
         .then(data => {
             allItems = [...storedItems, ...data.items];
@@ -64,6 +64,30 @@ document.addEventListener("DOMContentLoaded", function () {
             itemDropdown.appendChild(option);
         });
     }
+
+    // Zweites "DOMContentLoaded" Event ist unnötig, daher entfernt
+    // Button "Alle Artikel einkaufen"
+    const confirmBuyAllModalElement = document.getElementById('confirmBuyAllModal');
+    const confirmBuyAllModal = new bootstrap.Modal(confirmBuyAllModalElement);
+
+    document.getElementById("buyAllBtn").addEventListener("click", function () {
+        if (storedItems.length === 0) {
+            alert("Deine Einkaufsliste ist bereits leer!");
+            return;
+        }
+        // Öffnet das Bestätigungsmodal
+        confirmBuyAllModal.show();
+    });
+
+    // Bestätigung im Modal "Ja, alle einkaufen"
+    document.getElementById('confirmBuyAllBtn').addEventListener('click', function () {
+        storedItems = []; // Liste leeren
+        saveStoredItems(storedItems); // Speichern
+        renderArticles(storedItems); // Aktualisieren
+        updateItemCount(); // Artikelanzahl updaten
+        updateFilterOptions(); // Filter aktualisieren
+        confirmBuyAllModal.hide(); // Modal schließen
+    });
 
     // Controller: Artikel aus Dropdown zur Liste hinzufügen
     document.getElementById("addFromDropdownBtn").addEventListener("click", function () {

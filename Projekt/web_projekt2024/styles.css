@@ -1,0 +1,175 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.start-screen {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Übergang für den Slide-Effekt */
+}
+
+/* Wenn der Startbildschirm verschwindet, nach oben schieben */
+.start-screen.slide-up {
+    transform: translateY(-100%); /* Verschiebung nach oben */
+    opacity: 0;
+}
+
+
+
+/* Logo-Styling */
+.logo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    animation: wobble 1.5s infinite ease-in-out;
+}
+
+/* Wackel-Animation für das Logo */
+@keyframes wobble {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+    75% { transform: rotate(-3deg); }
+}
+
+/* Hinweistext wirklich mittig */
+.click-hint {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    animation: blink 1.5s infinite ease-in-out;
+    text-align: center;
+    width: fit-content;
+    margin: 20px auto 0;
+}
+
+/* Blinkende Animation für den Hinweis */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* Startbildschirm ausblenden */
+.start-screen.hide {
+    transform: translateY(-100%);
+}
+
+/* Mobile Anpassungen */
+@media (max-width: 768px) {
+    .logo {
+        width: 150px;
+        height: 150px;
+    }
+    .click-hint {
+        font-size: 1rem;
+    }
+}
+
+
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #50C878; /* Hellgrün */
+    color: white; /* Weißer Text */
+}
+.dropdown-menu {
+    display: none;
+}
+
+.dropdown.show .dropdown-menu {
+    display: block !important;
+}
+
+.dropdown {
+    position: relative;
+}
+.list-card .dropdown {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.card .dropdown {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.card {
+    position: static;
+}
+
+.container .row .col-md-4 {
+    margin-bottom: 20px;
+}
+
+/* Responsive Design: Bei kleinen Bildschirmen die Listen untereinander anordnen */
+@media (max-width: 768px) {
+    .container .row {
+        flex-direction: column; /* Listen untereinander anordnen */
+    }
+    .container .col-md-4 {
+        margin-bottom: 20px; /* Abstand zwischen den Listen */
+    }
+}
+
+
+.navbar {
+    height: 80px;
+}
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.profile-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+.btn-lg {
+    font-size: 1.2rem;
+    padding: 12px 20px;
+}
+.btn-success:hover {
+    background-color: #28a745;
+    opacity: 0.8;
+}
+
+.list-card {
+    transform: none; /* Keine Bewegung */
+    opacity: 1; /* Sichtbar */
+}
+
+.list-card:hover {
+    transform: scale(1.05);
+}
+.meatball-menu {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+.wishlist-container {
+    background-color: #d4edda;
+    border-radius: 10px;
+    padding: 20px;
+}
+.wishlist-title {
+    font-weight: 500;
+    color: #155724;
+}
+
+.table-header th {
+    background-color: #d4edda;
+    color: #155724;
+}

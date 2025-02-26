@@ -85,7 +85,10 @@ class View {
         });
     }
 
-
+    countArticles(list) {
+        const itemCount = list.items ? list.items.length : 0;
+        return itemCount;
+    }
 
     renderLists(lists) {
         const container = document.getElementById('shoppingLists');
@@ -93,34 +96,35 @@ class View {
         container.innerHTML = '';
 
         lists.forEach(list => {
+            const itemCount = this.countArticles(list);
+
             const listElement = document.createElement('div');
             listElement.className = 'col-md-4';
             listElement.innerHTML = `
-            <div class="card list-card shadow-sm position-relative"> 
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h5 class="card-title list-title">${list.name}</h5>
-                        <div class="dropdown">
-                            <i class="bi bi-three-dots meatball-menu" data-bs-toggle="dropdown"></i>
-                            <ul class="dropdown-menu dropdown-menu-end" data-bs-auto-close="outside">
-                                <li><a class="dropdown-item rename-list" href="#"><i class="bi bi-pencil"></i> Umbenennen</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-share"></i> Teilen</a></li>
-                                <li><a class="dropdown-item text-danger delete-list" href="#"><i class="bi bi-trash"></i> Löschen</a></li>
-                            </ul>
+                <div class="card list-card shadow-sm position-relative"> 
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title list-title">${list.name}</h5>
+                            <div class="dropdown">
+                                <i class="bi bi-three-dots meatball-menu" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu dropdown-menu-end" data-bs-auto-close="outside">
+                                    <li><a class="dropdown-item rename-list" href="#"><i class="bi bi-pencil"></i> Umbenennen</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-share"></i> Teilen</a></li>
+                                    <li><a class="dropdown-item text-danger delete-list" href="#"><i class="bi bi-trash"></i> Löschen</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-muted">Anzahl der Artikel: ${itemCount}</p>
+                        <div class="text-end">
+                            <a href="../html/view-list.html?listName=${list.name}" class="btn btn-outline-success">Ansehen</a>
                         </div>
                     </div>
-                    <!-- Button nach rechts verschieben -->
-                    <div class="text-end">
-                        <a href="../html/view-list.html?listName=${list.name}" class="btn btn-outline-success">Ansehen</a>
-                    </div>
                 </div>
-            </div>
-        `;
+            `;
 
             container.appendChild(listElement);
         });
     }
-
 
     bindAddArticle(handler) {
         document.getElementById("itemForm").addEventListener("submit", (event) => {

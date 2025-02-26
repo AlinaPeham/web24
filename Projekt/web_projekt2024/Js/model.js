@@ -17,7 +17,7 @@ class Model {
     async loadInitialData() {
 
         try {
-            const response = await fetch('../Data/data.json');
+            const response = await fetch('../JSON/data.json');
             const data = await response.json();
             data.items.forEach(item => {
                 this.itemEmojis[item.name.toLowerCase()] = item.emoji; // Kleinbuchstaben für besseren Vergleich

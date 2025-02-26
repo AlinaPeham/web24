@@ -1,5 +1,5 @@
-import Model from "../js/model.js";
-import View from "../js/view.js";
+import Model from "./model.js";
+import View from "./view.js";
 
 class Controller {
     constructor() {

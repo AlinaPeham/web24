@@ -120,7 +120,7 @@ class View {
                         </div>
                         <p class="text-muted">Anzahl der Artikel: ${itemCount}</p>
                         <div class="text-end">
-                            <a href="../html/view-list.html?listName=${list.name}" class="btn btn-outline-success">Ansehen</a>
+                            <a href="./view-list.html?listName=${list.name}" class="btn btn-outline-success">Ansehen</a>
                         </div>
                     </div>
                 </div>

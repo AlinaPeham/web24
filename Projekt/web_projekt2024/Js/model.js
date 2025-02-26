@@ -3,9 +3,7 @@ class Model {
         this.lists = this.loadLists();
         this.subscribers = [];
         this.articles = JSON.parse(localStorage.getItem('articles')) || [];
-        this.itemEmojis = {}; // Speichert Emojis für Artikel
-
-        // Initialdaten laden und danach `itemEmojis` setzen
+        this.itemEmojis = {};
         this.loadInitialData();
     }
 
@@ -30,6 +28,7 @@ class Model {
     }
 
 
+    //Article
     saveArticles() {
         localStorage.setItem('articles', JSON.stringify(this.articles));
     }
@@ -60,6 +59,8 @@ class Model {
     }
 
 
+
+    //List
     saveLists() {
         localStorage.setItem('shoppingLists', JSON.stringify(this.lists));
     }

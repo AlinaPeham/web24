@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
+
 <body>
+<!-- Startbildschirm -->
+<div class="start-screen bg-success">
+    <div class="logo-container">
+        <img src="../Images/Logo.webp" alt="Logo" class="logo img-fluid">
+        <p class="click-hint">Klicke auf mich!</p>
+    </div>
+</div>
+
+
+<!-- Navigationsleiste -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-success px-3 d-flex justify-content-between">
     <a class="navbar-brand" href="#">CartMate</a>
     <div class="dropdown">
@@ -36,7 +48,6 @@
 <div class="container mt-5 wishlist-container">
     <h2 class="wishlist-title">Was soll in meinen Einkaufswagen?</h2>
 
-    <!-- Erklärung zur Emoji-Funktion -->
     <p class="text-muted">
         Am Laptop wird automatisch ein passendes Emoji hinzugefügt, wenn es verfügbar ist.
         Auf dem Handy kannst du dein eigenes Emoji manuell eingeben.
@@ -61,7 +72,6 @@
         </form>
     </div>
 </div>
-
 
 <!-- Tabelle zur Anzeige der hinzugefügten Artikel -->
 <div class="container mt-4 mb-5" id="itemTableContainer" style="display: none;">
@@ -99,18 +109,39 @@
     </div>
 </div>
 
-<!-- JavaScript-Dateien -->
 <script type="module" src="../js/model.js"></script>
 <script type="module" src="../js/view.js"></script>
 <script type="module" src="../js/controller.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="../Css/styles.css">
 
-<!-- Controller initialisieren -->
 <script type="module">
     import Controller from '../js/controller.js';
     document.addEventListener('DOMContentLoaded', () => new Controller());
 
+
+    // Startbildschirm Logik
+    document.addEventListener('DOMContentLoaded', () => {
+        const startScreen = document.querySelector('.start-screen');
+        startScreen.style.visibility = 'visible';
+        startScreen.style.opacity = 1;
+
+        if (sessionStorage.getItem('visited')) {
+            startScreen.style.visibility = 'hidden';
+            startScreen.style.opacity = 0;
+        } else {
+            sessionStorage.setItem('visited', 'true');
+            setTimeout(() => {
+                startScreen.style.transform = 'translateY(-100%)';
+                startScreen.style.opacity = 0;
+            }, 10000);
+            startScreen.addEventListener('click', () => {
+                startScreen.style.transform = 'translateY(-100%)';
+                startScreen.style.opacity = 0;
+            });
+        }
+    });
 </script>
 </body>
 </html>

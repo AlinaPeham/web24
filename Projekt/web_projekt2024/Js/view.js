@@ -1,20 +1,21 @@
 class View {
     constructor() {
-        this.listContainer = document.getElementById('listContainer');
+
         this.newListForm = document.getElementById('newListForm');
         this.listNameInput = document.getElementById('listName');
-        this.itemForm = document.getElementById("itemForm");
         this.itemTableContainer = document.getElementById("itemTableContainer");
         this.itemTableBody = document.getElementById("itemTableBody");
     }
 
+
+    //Lists
     bindAddList(handler) {
         this.newListForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const name = this.listNameInput.value.trim();
             if (name) {
-                handler(name);  // Liste hinzufügen
-                this.listNameInput.value = '';  // Eingabefeld leeren
+                handler(name);
+                this.listNameInput.value = '';
 
                 // Bootstrap-Modal schließen
                 const newListModal = bootstrap.Modal.getInstance(document.getElementById('newListModal'));
@@ -48,6 +49,7 @@ class View {
         });
     }
 
+    //Name ändern der Liste
     showRenameModal(oldName, handler) {
         const modalHtml = `
         <div class="modal fade" id="renameListModal" tabindex="-1" aria-labelledby="renameListModalLabel" aria-hidden="true">
@@ -81,15 +83,17 @@ class View {
                 handler(oldName, newName);
             }
             renameListModal.hide();
-            document.getElementById('renameListModal').remove(); // Entferne das Modal nach dem Schließen
+            document.getElementById('renameListModal').remove();
         });
     }
 
+    //Methode zum Zählen der enthaltenen Artikel
     countArticles(list) {
         const itemCount = list.items ? list.items.length : 0;
         return itemCount;
     }
 
+    //Aussehen der Liste
     renderLists(lists) {
         const container = document.getElementById('shoppingLists');
         if (!container) return;
@@ -126,6 +130,9 @@ class View {
         });
     }
 
+
+
+    //Article
     bindAddArticle(handler) {
         document.getElementById("itemForm").addEventListener("submit", (event) => {
             event.preventDefault();
@@ -141,7 +148,7 @@ class View {
 
     // Funktion zum Hinzufügen eines Artikels zur Tabelle
     renderArticles(articles) {
-        this.itemTableBody.innerHTML = ""; // Leere die Tabelle vorher
+        this.itemTableBody.innerHTML = "";
 
         articles.forEach((article, index) => {
             const row = document.createElement("tr");
@@ -184,7 +191,7 @@ class View {
             });
         });
 
-        // Event-Listener für das Bearbeiten (bei Direktbearbeitung)
+        // Event-Listener für das Bearbeiten
         document.querySelectorAll(".editable").forEach(cell => {
             cell.addEventListener("blur", (event) => {
                 const index = event.target.getAttribute("data-index");
@@ -195,7 +202,7 @@ class View {
         });
     }
 
-// Callback-Funktion für Umbenennen weiterleiten
+   //Umbennen Artikelname und Kategorie
     handleEdit(index) {
         const article = this.articles[index];
 

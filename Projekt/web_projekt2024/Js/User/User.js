@@ -7,7 +7,7 @@ class User {
 
     // Methode zum Erstellen einer neuen Liste
     createList(name) {
-        const newList = new List(name);
+        const newList = new ListModel(name);
         this.shoppingLists.push(newList);
         return newList;
     }
